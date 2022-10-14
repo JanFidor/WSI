@@ -1,0 +1,1 @@
+This is a repository for homework for my university course "Entry to Artificial Intelligence"
