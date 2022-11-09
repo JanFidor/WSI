@@ -23,5 +23,5 @@ class Problem:
             height += velocity
             i += 1
 
-        if height >= 0: return -1000
-        return 2000 - fuel
+        if 0 < height < 2 and abs(velocity) < 2: return 2000 - fuel
+        return -1000

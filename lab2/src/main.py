@@ -4,20 +4,27 @@ import random as rand
 import numpy.random as npr
 
 def main():
-    problem = Problem(200)
-    mappers = gen.GeneticAlgorithmMappers(
-        mutation_func,
-        cross_over_func,
-        succession_divider
-    )
+    change_mutation_and_Crossover()
 
-    params = gen.GeneticAlgorithmHyperParameters(0.01, 0.2, 24, 10, 4)
+def change_mutation_and_Crossover():
+    mutations = [0.05, 0.1, 0.15, 0.2, 0.25]
+    cross_overs = [0.1, 0.15, 0.2, 0.25, 0.3]
 
+    for mutation in mutations:
+        for cross_over in cross_overs:
+            problem = Problem(200)
+            mappers = gen.GeneticAlgorithmMappers(
+                mutation_func,
+                cross_over_func,
+                succession_divider
+            )
+            params = gen.GeneticAlgorithmHyperParameters(mutation, cross_over, 100, 100, 10)
+            print(mutation, cross_over, winning_solution_value(problem, mappers, params))
+
+def winning_solution_value(problem, mappers, params):
     solver = gen.GeneticSolver(params)
-
-    solution = solver.solve(problem, mappers)
-    print(solution.genes, problem.evaluate(solution.genes))
-
+    solutions = [solver.solve(problem, mappers) for _ in range(25)]
+    return round(sum([solutions]) / 25, 2)
 
 def cross_over_func(genes_pair, probability):
     if rand.random() < probability:
@@ -35,7 +42,8 @@ def mutation_func(genes, probability):
 
 def succession_divider(population, fitness_values, winners_size):
     mn = min(fitness_values)
-    adjusted_fitness = [fitness + abs(mn) for fitness in fitness_values]
+    adjusted_fitness = [fitness + abs(mn)*1.001 for fitness in fitness_values]
+
     mx = sum(adjusted_fitness)
 
     selection_probs = [fitness/mx for fitness in adjusted_fitness]
