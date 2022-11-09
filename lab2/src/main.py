@@ -18,13 +18,14 @@ def change_mutation_and_Crossover():
                 cross_over_func,
                 succession_divider
             )
-            params = gen.GeneticAlgorithmHyperParameters(mutation, cross_over, 100, 100, 10)
+            params = gen.GeneticAlgorithmHyperParameters(mutation, cross_over, 500, 20, 10)
             print(mutation, cross_over, winning_solution_value(problem, mappers, params))
 
 def winning_solution_value(problem, mappers, params):
     solver = gen.GeneticSolver(params)
     solutions = [solver.solve(problem, mappers) for _ in range(25)]
-    return round(sum([solutions]) / 25, 2)
+    values = map(lambda x: problem.evaluate(x.genes), solutions)
+    return round(sum(values ) / 25, 2)
 
 def cross_over_func(genes_pair, probability):
     if rand.random() < probability:
@@ -46,10 +47,9 @@ def succession_divider(population, fitness_values, winners_size):
 
     mx = sum(adjusted_fitness)
 
+    size = len(population)
     selection_probs = [fitness/mx for fitness in adjusted_fitness]
-    winners_ids = npr.choice(len(population), winners_size, p=selection_probs, replace=False)
-    loosers, winners = [], []
-    for id in range(len(population)): (loosers, winners)[id in winners_ids].append(id)
-    return [population[id] for id in loosers], [population[id] for id in winners]
+    new_population_ids = [npr.choice(range(len(size)), p=selection_probs)]
+    return [population[id].copy(population[id].genes) for id in new_population_ids]
 
 main()
