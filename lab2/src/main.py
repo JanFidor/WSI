@@ -44,12 +44,11 @@ def mutation_func(genes, probability):
 def succession_divider(population, fitness_values, winners_size):
     mn = min(fitness_values)
     adjusted_fitness = [fitness + abs(mn)*1.001 for fitness in fitness_values]
-
     mx = sum(adjusted_fitness)
 
-    size = len(population)
+    size_range = range(len(population))
     selection_probs = [fitness/mx for fitness in adjusted_fitness]
-    new_population_ids = [npr.choice(range(len(size)), p=selection_probs)]
-    return [population[id].copy(population[id].genes) for id in new_population_ids]
+    new_population_ids = [npr.choice(size_range, p=selection_probs) for _ in size_range]
+    return [population[id].copy(population[id].genes) for id in new_population_ids], []
 
 main()
