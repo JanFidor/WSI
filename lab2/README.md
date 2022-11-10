@@ -23,6 +23,8 @@ Populacja 100 + epoki 100
 | 0.2 |  | 1549.72 | 1784.04 | 1552.28 | 1669.28 | 1783.68 | 
 | 0.25 |  | 1667.64 | 1783.2 | 1901.0 | 1786.24 |1784.680 |
 
+* Znaczna przewaga populacji
+
 Populacja 500 + epoki 20
 
 | | CrossOver | 0.1| 0.15 | 0.2 | 0.25 | 0.3 |
@@ -36,6 +38,7 @@ Populacja 500 + epoki 20
 
 
 Wnioski: 
+* Krzyżowanie powinno być częstsze od mutacji, żeby uniknąć znacznej losowości eksploracji
 * Przy za niskim prawdopodobieństwie mutacji algorytm ma problem z eksploracją <- wynikiem może być -1000 
 * Potrzebne jest wysokie prawdopodobieństwo krzyżowania albo mutacji, żeby algorytm był w stanie konsekwentnie osiągać wysokie wyniki
 * Duża populacja z małą liczbą epok daje lepsze wyniki niż bardziej zbalansowane wartości, co ma sens, ponieważ ułatwia to algorytmowi eksplorację i wyjście z przypadku kiedy rakieta się rozbija
