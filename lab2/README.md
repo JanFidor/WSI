@@ -1,3 +1,12 @@
+Cel ćwiczenia:
+Implementacja algorytmu genetycznego, którego zadaniem jest znalezienie rozwiązania dla problemu zużycia paliwa przez rakietę.
+
+Eksperymenty:
+* Rozpoczęcie z losowo wybranymi genomami
+* Skoki prawdopodobieństwa mutacji i krzyżowania 0.05
+* Krzyżowanie ma średnio większą wartość od mutacji, żeby uniknąć zbytniej losowości eksploracji
+
+
 Decyzje projektowe:
 
 * Przekazaywanie odpowiednich funkcji algorytmu poprzez klasę -> delegacja -> SRP
